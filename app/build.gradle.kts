@@ -46,4 +46,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //pdf viewer
+    implementation("com.github.mhiew:android-pdf-viewer:3.2.0-beta.1")
 }

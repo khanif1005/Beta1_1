@@ -8,12 +8,68 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv_title_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:text="NASHO LEARN"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/ic_profile"
+        android:layout_width="33dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_logo_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/img_logo_home"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/btn_nahwu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/nahwu_main"
+        app:layout_constraintStart_toStartOf="@+id/img_logo_home"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo_home"
+        />
+
+    <ImageView
+        android:id="@+id/btn_sharaf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/sharaf_main"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo_home"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo_home"
+        />
+
+    <ImageView
+        android:id="@+id/ilustration_home"
+        android:layout_width="428dp"
+        android:layout_height="143dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/img_illustration_home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
