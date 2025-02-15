@@ -26,6 +26,10 @@ android {
             )
         }
 
+        buildFeatures {
+            viewBinding = true
+        }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -49,4 +53,5 @@ dependencies {
 
     //pdf viewer
     implementation("com.github.mhiew:android-pdf-viewer:3.2.0-beta.1")
+    implementation(kotlin("script-runtime"))
 }

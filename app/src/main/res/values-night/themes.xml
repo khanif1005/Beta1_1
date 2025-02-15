@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Beta1_1" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="CustomRadioButton" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorControlNormal">@color/black</item> <!-- Unchecked color -->
+        <item name="colorControlActivated">@color/shadeofblue</item> <!-- Checked color -->
     </style>
 </resources>

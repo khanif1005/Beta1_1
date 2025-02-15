@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- CardView Background Gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp"/> <!-- Match with CardView's corner radius -->
+            <gradient
+                android:angle="0"
+                android:startColor="@color/startgradient"
+                android:endColor="@color/endgradient"
+                android:type="linear"/>
+        </shape>
+    </item>
+</layer-list>

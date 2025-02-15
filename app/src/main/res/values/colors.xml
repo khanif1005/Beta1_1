@@ -7,4 +7,7 @@
     <color name="mediumdarksideofblue">#3B5998</color>
     <color name="shadeofgray">#6B6B6B</color>
     <color name="mutedshadeofgreen">#A9D0A8</color>
+    <color name="shadeofgreen">#015869</color>
+    <color name="startgradient">#F1FDFF</color>
+    <color name="endgradient">#AFD2FE</color>
 </resources>

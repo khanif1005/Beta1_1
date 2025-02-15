@@ -5,5 +5,11 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="CustomRadioButton" parent="Theme.MaterialComponents.Light">
+        <item name="colorControlNormal">@color/black</item> <!-- Unchecked color -->
+        <item name="colorControlActivated">@color/shadeofblue</item> <!-- Checked color -->
+    </style>
+
+
     <style name="Theme.Beta1_1" parent="Base.Theme.Beta1_1" />
 </resources>
