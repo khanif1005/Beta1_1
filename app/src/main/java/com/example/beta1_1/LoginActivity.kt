@@ -8,21 +8,33 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.beta1_1.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
+
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
-        val btnLogin: Button = findViewById(R.id.btn_login)
-        btnLogin.setOnClickListener(this)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnLogin.setOnClickListener(this)
+        binding.tvRegist.setOnClickListener(this)
+
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
+    override fun onClick(p: View?) {
+        when (p?.id) {
             R.id.btn_login -> {
                 val moveIntent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(moveIntent)
+            }
+
+            R.id.tv_regist -> {
+                val moveIntent = Intent (this@LoginActivity, SignUpActivity::class.java)
+                startActivity((moveIntent))
             }
         }
     }
