@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -44,14 +45,13 @@ android {
 }
 
 dependencies {
-    // Dependensi AndroidX (pastikan semuanya menggunakan versi terbaru)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // PDF Viewer (pastikan library ini sudah menggunakan AndroidX)
+    // PDF Viewer
     implementation("com.github.mhiew:android-pdf-viewer:3.2.0-beta.1") {
         exclude(group = "com.android.support", module = "support-compat") // Hindari Support Library
     }

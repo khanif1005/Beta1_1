@@ -1,10 +1,11 @@
-package com.example.beta1_1
+package com.example.beta1_1.Activity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.beta1_1.R
 
 class QuestionsDiscussionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

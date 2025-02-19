@@ -16,15 +16,13 @@
         tools:targetApi="31"
         tools:remove="android:appComponentFactory">
 
-        <!-- Hapus intent-filter dari MainActivity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true">
         </activity>
 
-        <!-- Tambahkan intent-filter ke LoginActivity -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,33 +30,32 @@
             </intent-filter>
         </activity>
 
-        <!-- Aktivitas lainnya (tetap seperti sebelumnya) -->
         <activity
-            android:name=".QuestionsDiscussionActivity"
+            android:name=".Activity.QuestionsDiscussionActivity"
             android:exported="false" />
         <activity
-            android:name=".QuizResultActivity"
+            android:name=".Activity.QuizResultActivity"
             android:exported="false" />
         <activity
-            android:name=".QuestionsActivity"
+            android:name=".Activity.QuestionsActivity"
             android:exported="false" />
         <activity
-            android:name=".MaterialVideoActivity"
+            android:name=".Activity.MaterialVideoActivity"
             android:exported="false" />
         <activity
-            android:name=".MaterialDetailActivity"
+            android:name=".Activity.MaterialDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".SharafListActivity"
+            android:name=".Activity.SharafListActivity"
             android:exported="false" />
         <activity
-            android:name=".NahwuListActivity"
+            android:name=".Activity.NahwuListActivity"
             android:exported="false" />
         <activity
             android:name=".MaterialListActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".Activity.SignUpActivity"
             android:exported="false" />
     </application>
 
