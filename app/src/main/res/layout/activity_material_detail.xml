@@ -19,14 +19,25 @@
         />
 
     <TextView
-        android:id="@+id/tv_materialdetail_title"
+        android:id="@+id/tv_materialdetail_bab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Materi 1"
         android:fontFamily="@font/poppins_bold"
         app:layout_constraintTop_toTopOf="@+id/ic_back_material_detail"
         app:layout_constraintBottom_toBottomOf="@+id/ic_back_material_detail"
-        app:layout_constraintStart_toEndOf="@+id/ic_back_material_detail"
+        app:layout_constraintStart_toStartOf="@+id/tv_materialdetail_title"
+        app:layout_constraintEnd_toEndOf="@+id/tv_materialdetail_title"
+        />
+
+    <TextView
+        android:id="@+id/tv_materialdetail_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teori Dasar Nahwu"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintTop_toBottomOf="@+id/ic_back_material_detail"
+        app:layout_constraintStart_toStartOf="@+id/ic_back_material_detail"
         app:layout_constraintEnd_toEndOf="parent"
         />
 

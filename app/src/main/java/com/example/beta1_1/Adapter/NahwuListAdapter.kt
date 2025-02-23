@@ -3,14 +3,23 @@ package com.example.beta1_1.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beta1_1.DataClass.MaterialNahwuList
 import com.example.beta1_1.R
 
-class NahwuListAdapter(private val nahwuList: ArrayList<MaterialNahwuList>) : RecyclerView.Adapter<NahwuListAdapter.NahwuViewHolder>() {
+class NahwuListAdapter(
+    private val nahwuList: ArrayList<MaterialNahwuList>,
+    private val listener: OnItemClickListener) : RecyclerView.Adapter<NahwuListAdapter.NahwuViewHolder>()
 
-    fun updateData(newData: ArrayList<MaterialNahwuList>) {
+    {
+
+        interface OnItemClickListener {
+            fun onItemClick(material: MaterialNahwuList)
+        }
+
+        fun updateData(newData: ArrayList<MaterialNahwuList>) {
         nahwuList.clear()
         nahwuList.addAll(newData)
         notifyDataSetChanged()
@@ -25,6 +34,10 @@ class NahwuListAdapter(private val nahwuList: ArrayList<MaterialNahwuList>) : Re
         val materialNahwuList = nahwuList[position]
         holder.bab.text = materialNahwuList.bab
         holder.materialName.text = materialNahwuList.materialName
+
+        holder.itemView.setOnClickListener{
+            listener.onItemClick(materialNahwuList)
+        }
     }
 
     override fun getItemCount(): Int {

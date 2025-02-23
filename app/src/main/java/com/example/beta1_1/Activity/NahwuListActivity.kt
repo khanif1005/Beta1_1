@@ -1,5 +1,6 @@
 package com.example.beta1_1.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -34,8 +35,16 @@ class NahwuListActivity : AppCompatActivity() {
 
     private fun setupRecyclerViews() {
         // Initialize kedua adapter
-        adapterBeforeUTS = NahwuListAdapter(ArrayList())
-        adapterAfterUTS = NahwuListAdapter(ArrayList())
+        adapterBeforeUTS = NahwuListAdapter(ArrayList(), object : NahwuListAdapter.OnItemClickListener {
+            override fun onItemClick(material: MaterialNahwuList) {
+                navigateToDetail(material)
+            }
+        })
+        adapterAfterUTS = NahwuListAdapter(ArrayList(), object : NahwuListAdapter.OnItemClickListener {
+            override fun onItemClick(material: MaterialNahwuList) {
+                navigateToDetail(material)
+            }
+        })
 
         // Setup RecyclerView sebelum UTS
         binding.rvMaterialnahwuBeforeUts.apply {
@@ -50,6 +59,14 @@ class NahwuListActivity : AppCompatActivity() {
             adapter = adapterAfterUTS
             setHasFixedSize(true)
         }
+    }
+
+    private fun navigateToDetail(material: MaterialNahwuList) {
+        val intent = Intent (this, MaterialDetailActivity::class.java).apply {
+            putExtra("EXTRA_BAB", material.bab)
+            putExtra("EXTRA_MATERI_NAME", material.materialName)
+        }
+        startActivity(intent)
     }
 
     private fun setupFirestore() {
