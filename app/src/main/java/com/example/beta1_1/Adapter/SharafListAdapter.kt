@@ -3,12 +3,20 @@ package com.example.beta1_1.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beta1_1.DataClass.MaterialSharafList
 import com.example.beta1_1.R
 
-class SharafListAdapter(private val sharafList: ArrayList<MaterialSharafList>) : RecyclerView.Adapter<SharafListAdapter.SharafViewHolder>() {
+class SharafListAdapter(
+    private val sharafList: ArrayList<MaterialSharafList>,
+    private val listener: OnItemClickListener
+) : RecyclerView.Adapter<SharafListAdapter.SharafViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick (material: MaterialSharafList)
+    }
 
     fun updateData(newData: ArrayList<MaterialSharafList>) {
         sharafList.clear()
@@ -27,6 +35,10 @@ class SharafListAdapter(private val sharafList: ArrayList<MaterialSharafList>) :
         val materialSharafList = sharafList[position]
         holder.bab.text = materialSharafList.bab
         holder.materialName.text = materialSharafList.materialName
+
+        holder.itemView.setOnClickListener{
+            listener.onItemClick(materialSharafList)
+        }
 
     }
 

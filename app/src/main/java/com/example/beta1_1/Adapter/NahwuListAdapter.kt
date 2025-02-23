@@ -14,7 +14,6 @@ class NahwuListAdapter(
     private val listener: OnItemClickListener) : RecyclerView.Adapter<NahwuListAdapter.NahwuViewHolder>()
 
     {
-
         interface OnItemClickListener {
             fun onItemClick(material: MaterialNahwuList)
         }

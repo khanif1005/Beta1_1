@@ -1,5 +1,6 @@
 package com.example.beta1_1.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -32,13 +33,27 @@ class SharafListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerViews() {
-        sharafListAdapter = SharafListAdapter(ArrayList())
+
+        sharafListAdapter = SharafListAdapter(ArrayList(), object : SharafListAdapter.OnItemClickListener {
+            override fun onItemClick(material : MaterialSharafList) {
+                navigateToDetail(material)
+            }
+        })
 
         binding.rvSharafList.apply {
             layoutManager = LinearLayoutManager(this@SharafListActivity)
             adapter = sharafListAdapter
             setHasFixedSize(true)
         }
+
+    }
+
+    private fun navigateToDetail(material: MaterialSharafList) {
+        val intent = Intent(this, MaterialDetailActivity::class.java).apply {
+            putExtra("EXTRA_BAB", material.bab)
+            putExtra("EXTRA_MATERI_NAME", material.materialName)
+        }
+        startActivity(intent)
     }
 
     private fun setupFirestore() {
@@ -62,9 +77,9 @@ class SharafListActivity : AppCompatActivity() {
                     }
                 }
 
-                // Perbaikan di sini: kirim data yang sudah diambil
+                //kirim data yang sudah diambil
                 sharafListAdapter.updateData(allMaterials)
-                Log.d("Firestore Debug", "Data loaded: ${allMaterials.size} items") // Tambahkan log
+                Log.d("Firestore Debug", "Data loaded: ${allMaterials.size} items")
             }
     }
 
