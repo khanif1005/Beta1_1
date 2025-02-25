@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MaterialSharafList(
-    var bab: String ?= "",
-    var materialName: String ?= "",
-    var orderField: Long = 0L
+    val bab: String ?= "",
+    val materialName: String ?= "",
+    val orderField: Long = 0L
 ) : Parcelable

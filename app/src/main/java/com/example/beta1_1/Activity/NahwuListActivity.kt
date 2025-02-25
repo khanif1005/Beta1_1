@@ -65,6 +65,7 @@ class NahwuListActivity : AppCompatActivity() {
         val intent = Intent (this, MaterialDetailActivity::class.java).apply {
             putExtra("EXTRA_BAB", material.bab)
             putExtra("EXTRA_MATERI_NAME", material.materialName)
+            putExtra("EXTRA_YOUTUBE", material.youtube)
         }
         startActivity(intent)
     }

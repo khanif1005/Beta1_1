@@ -12,8 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var auth : FirebaseAuth
-
+    private lateinit var auth : FirebaseAuth
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +26,17 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         auth = FirebaseAuth.getInstance()
 
+        if (auth.currentUser != null) {
+            redirectToMainActivity()
+            return
+        }
+
+    }
+
+    private fun redirectToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onClick(p: View?) {
