@@ -1,5 +1,6 @@
 package com.example.beta1_1.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -32,27 +33,34 @@ class QuestionsActivity : AppCompatActivity() {
 
         setupRecylerView(questions ?: emptyList())
         setupSubmitButton()
+        setupBackButton()
 
     }
 
     private fun setupSubmitButton() {
         binding.btnSubmitQuiz.setOnClickListener{
             val score = adapter.calculateScore()
-            val totalQuestions = adapter.itemCount
-            showResultDialog(score, totalQuestions)
+
+            Intent(this@QuestionsActivity, QuizResultActivity::class.java).apply {
+                putExtra("EXTRA_SCORE", score)
+                putExtra("EXTRA_TOTAL", 100)
+                startActivity(this)
+            }
+            finish()
+//            showResultDialog(score, totalQuestions)
         }
     }
 
-    private fun showResultDialog(score: Int, total: Int) {
-        AlertDialog.Builder(this)
-            .setTitle("Hasil Kuis")
-            .setMessage("Skor Anda: $score/$total")
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-                finish()
-            }
-            .show()
-    }
+//    private fun showResultDialog(score: Int, total: Int) {
+//        AlertDialog.Builder(this)
+//            .setTitle("Hasil Kuis")
+//            .setMessage("Skor Anda: $score/$total")
+//            .setPositiveButton("OK") { dialog, _ ->
+//                dialog.dismiss()
+//                finish()
+//            }
+//            .show()
+//    }
 
     private fun setupRecylerView(questions: List<NahwuQuestions>) {
         Log.d("cek kuis", "error: ${questions}")
@@ -60,6 +68,12 @@ class QuestionsActivity : AppCompatActivity() {
         binding.rvQuestions.apply {
             layoutManager = LinearLayoutManager(this@QuestionsActivity)
             adapter = this@QuestionsActivity.adapter
+        }
+    }
+
+    private fun setupBackButton() {
+        binding.icBackQuestions.setOnClickListener{
+            finish()
         }
     }
 }

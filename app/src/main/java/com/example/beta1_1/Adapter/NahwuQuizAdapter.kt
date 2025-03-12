@@ -37,7 +37,7 @@ class NahwuQuizAdapter (private val questions: List<NahwuQuestions>) :
 
     fun calculateScore(): Int {
         return questions.mapIndexed { index, question ->
-            if (usersAnswers[index] == question.correct_answer) 1 else 0
+            if (usersAnswers[index] == question.correct_answer) 20 else 0
         }.sum()
     }
 
