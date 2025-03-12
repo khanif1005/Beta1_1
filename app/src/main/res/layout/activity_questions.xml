@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.QuestionsActivity">
-    
+    android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,53 +19,43 @@
             android:layout_marginStart="15dp"
             android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tv_questions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:fontFamily="@font/poppins_bold"
             app:layout_constraintTop_toTopOf="@+id/ic_back_questions"
             app:layout_constraintBottom_toBottomOf="@+id/ic_back_questions"
             app:layout_constraintStart_toStartOf="@+id/tv_questions_title"
-            app:layout_constraintEnd_toEndOf="@+id/tv_questions_title"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/tv_questions_title"/>
 
         <TextView
             android:id="@+id/tv_questions_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:text="Judul Materi"
             android:fontFamily="@font/poppins_bold"
-            android:textSize="25sp"
+            android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@+id/tv_questions"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <LinearLayout
-            android:id="@+id/ll_questions"
-            android:layout_width="0dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_questions"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_questions_title">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_questions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:nestedScrollingEnabled="false"
-                tools:itemCount="5"
-                tools:listitem="@layout/item_layout_questions"
-                />
-
-       </LinearLayout>
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_questions_title"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_layout_questions" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_submit_quiz"
@@ -79,13 +70,11 @@
             android:textStyle="bold"
             app:backgroundTint="@color/shadeofblue"
             app:cornerRadius="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintTop_toBottomOf="@+id/rv_questions"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_questions"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

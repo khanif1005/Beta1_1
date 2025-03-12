@@ -66,6 +66,8 @@ class NahwuListActivity : AppCompatActivity() {
             putExtra("EXTRA_BAB", material.bab)
             putExtra("EXTRA_MATERI_NAME", material.materialName)
             putExtra("EXTRA_YOUTUBE", material.youtube)
+            putExtra("EXTRA_MATERI_ID", material.quiz_id)
+            putExtra("EXTRA_DOCUMENT_ID", material.document_id)
         }
         startActivity(intent)
     }

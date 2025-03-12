@@ -64,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:text="Lorem"
                 android:theme="@style/CustomRadioButton"
-                android:background="@color/mutedshadeofgreen"
                 />
 
             <RadioButton
@@ -73,7 +72,6 @@
                 android:layout_height="match_parent"
                 android:text="Ipsum"
                 android:theme="@style/CustomRadioButton"
-                android:background="@color/mutedshadeofgreen"
                 />
 
             <RadioButton
@@ -82,7 +80,6 @@
                 android:layout_height="match_parent"
                 android:text="Dolor"
                 android:theme="@style/CustomRadioButton"
-                android:background="@color/mutedshadeofgreen"
                 />
 
             <RadioButton
@@ -91,7 +88,6 @@
                 android:layout_height="match_parent"
                 android:text="Amet"
                 android:theme="@style/CustomRadioButton"
-                android:background="@color/mutedshadeofgreen"
                 />
 
         </RadioGroup>
