@@ -31,31 +31,37 @@ class MaterialDetailActivity : AppCompatActivity() {
         bab = intent.getStringExtra("EXTRA_BAB")
         materiName = intent.getStringExtra("EXTRA_MATERI_NAME")
         val youtube = intent.getStringExtra("EXTRA_YOUTUBE")
+        currentMateriId = intent.getStringExtra("EXTRA_MATERI_ID") ?: ""
+        documentId = intent.getStringExtra("EXTRA_DOCUMENT_ID")?: ""
 
         binding.tvMaterialdetailBab.text = bab
         binding.tvMaterialdetailTitle.text = materiName
 
-        setupBackButton()
-        setupWatchVideoButton(youtube, bab, materiName)
-
-        currentMateriId = intent.getStringExtra("EXTRA_MATERI_ID") ?: ""
-        documentId = intent.getStringExtra("EXTRA_DOCUMENT_ID")?: ""
-
         binding.btnStartQuiz.setOnClickListener{
+            if (documentId.isEmpty()) {
+                Toast.makeText(this, "Materi tidak valid", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             loadQuizFromFirestore()
         }
+
+        setupBackButton()
+        setupWatchVideoButton(youtube, bab, materiName)
 
     }
 
     private fun loadQuizFromFirestore() {
-        val db = FirebaseFirestore.getInstance()
 
+        val db = FirebaseFirestore.getInstance()
         db.collection("materialNahwuList").document(documentId)
             .get()
             .addOnSuccessListener { materiDoc ->
-                Log.d("cek kuis", "error: ${currentMateriId}")
-                Log.d("cek kuis", "error: ${materiDoc}")
-                val quizId = materiDoc.getString("quiz_id") ?: let {
+                if (!materiDoc.exists()) {
+                    Toast.makeText(this, "Materi tidak ditemukan", Toast.LENGTH_SHORT).show()
+                    return@addOnSuccessListener
+                }
+
+                val quizId = materiDoc.getString("quiz_id") ?: run {
                     Toast.makeText(this, "Kuis tidak tersedia", Toast.LENGTH_SHORT).show()
                     return@addOnSuccessListener
                 }
@@ -104,6 +110,7 @@ class MaterialDetailActivity : AppCompatActivity() {
         val intent = Intent(this, QuestionsActivity::class.java).apply {
             putExtra("EXTRA_BAB", bab)
             putExtra("EXTRA_MATERI_NAME", materiName)
+            putExtra("EXTRA_DOCUMENT_ID", documentId)
             putParcelableArrayListExtra("QUESTIONS", ArrayList(questions))
         }
         startActivity(intent)
