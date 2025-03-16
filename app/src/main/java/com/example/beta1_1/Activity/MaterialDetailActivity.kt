@@ -2,6 +2,7 @@ package com.example.beta1_1.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
@@ -20,6 +21,7 @@ class MaterialDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMaterialDetailBinding
     private lateinit var currentMateriId : String
     private lateinit var documentId : String
+    private var materi: String? = null
     private var bab: String? = null
     private var materiName: String? = null
 
@@ -28,6 +30,7 @@ class MaterialDetailActivity : AppCompatActivity() {
         binding = ActivityMaterialDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        materi = intent.getStringExtra("EXTRA_MATERI")
         bab = intent.getStringExtra("EXTRA_BAB")
         materiName = intent.getStringExtra("EXTRA_MATERI_NAME")
         val youtube = intent.getStringExtra("EXTRA_YOUTUBE")
@@ -36,6 +39,7 @@ class MaterialDetailActivity : AppCompatActivity() {
 
         binding.tvMaterialdetailBab.text = bab
         binding.tvMaterialdetailTitle.text = materiName
+        binding.tvMateriDetail.text = Html.fromHtml(materi, Html.FROM_HTML_MODE_COMPACT)
 
         binding.btnStartQuiz.setOnClickListener{
             if (documentId.isEmpty()) {

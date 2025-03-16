@@ -66,5 +66,9 @@ class NahwuQuizAdapter (private val questions: List<NahwuQuestions>) :
         }
     }
 
+    fun getUserAnswers(): Map<Int, Int> {
+        return usersAnswers.toMap()
+    }
+
 
 }

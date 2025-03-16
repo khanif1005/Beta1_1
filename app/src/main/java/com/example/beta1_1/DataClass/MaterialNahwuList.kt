@@ -12,5 +12,6 @@ data class MaterialNahwuList(
     val orderField: Long = 0L,
     val youtube: String ?= "",
     val quiz_id: String ?= "",
-    val document_id: String ?= ""
+    val document_id: String ?= "",
+    val materi: String ?= ""
 ) : Parcelable

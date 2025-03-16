@@ -10,4 +10,5 @@
     <color name="shadeofgreen">#015869</color>
     <color name="startgradient">#F1FDFF</color>
     <color name="endgradient">#AFD2FE</color>
+    <color name="red">#F44336</color>
 </resources>

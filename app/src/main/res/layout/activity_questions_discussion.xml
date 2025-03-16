@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -55,13 +55,13 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_discussions_title">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_questions"
+                android:id="@+id/rv_discussion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:nestedScrollingEnabled="false"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_layout_questions"
+                tools:listitem="@layout/item_layout_discussion"
                 />
 
         </LinearLayout>
@@ -88,4 +88,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

@@ -18,15 +18,19 @@ class QuestionsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuestionsBinding
     private lateinit var adapter: NahwuQuizAdapter
+    private lateinit var questions: ArrayList<NahwuQuestions>
+    private var materiName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuestionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        questions = intent.getParcelableArrayListExtra<NahwuQuestions>("QUESTIONS") ?: arrayListOf()
+
         val bab = intent.getStringExtra("EXTRA_BAB")
-        val materiName = intent.getStringExtra("EXTRA_MATERI_NAME")
-        val questions = intent.getParcelableArrayListExtra <NahwuQuestions>("QUESTIONS")
+        materiName = intent.getStringExtra("EXTRA_MATERI_NAME")
+
 
         binding.tvQuestions.text = bab
         binding.tvQuestionsTitle.text = materiName
@@ -38,29 +42,26 @@ class QuestionsActivity : AppCompatActivity() {
     }
 
     private fun setupSubmitButton() {
-        binding.btnSubmitQuiz.setOnClickListener{
+        binding.btnSubmitQuiz.setOnClickListener {
             val score = adapter.calculateScore()
+            val userAnswers = adapter.getUserAnswers()
 
             Intent(this@QuestionsActivity, QuizResultActivity::class.java).apply {
                 putExtra("EXTRA_SCORE", score)
                 putExtra("EXTRA_TOTAL", 100)
+                putExtra("EXTRA_MATERI_NAME", materiName)
+                putParcelableArrayListExtra("QUESTIONS", ArrayList(questions))
+
+                // Konversi ke HashMap<String, Int>
+                val stringKeyMap = userAnswers.mapKeys { it.key.toString() } as HashMap<String, Int>
+                putExtra("USER_ANSWERS", stringKeyMap)
+
                 startActivity(this)
             }
             finish()
-//            showResultDialog(score, totalQuestions)
         }
     }
 
-//    private fun showResultDialog(score: Int, total: Int) {
-//        AlertDialog.Builder(this)
-//            .setTitle("Hasil Kuis")
-//            .setMessage("Skor Anda: $score/$total")
-//            .setPositiveButton("OK") { dialog, _ ->
-//                dialog.dismiss()
-//                finish()
-//            }
-//            .show()
-//    }
 
     private fun setupRecylerView(questions: List<NahwuQuestions>) {
         Log.d("cek kuis", "error: ${questions}")
