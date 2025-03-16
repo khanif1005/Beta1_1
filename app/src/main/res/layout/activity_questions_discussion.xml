@@ -41,7 +41,7 @@
             android:layout_marginTop="15dp"
             android:text="Judul Materi"
             android:fontFamily="@font/poppins_bold"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/tv_discussions"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
