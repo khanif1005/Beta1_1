@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
-                android:text="Nasho Learn"
+                android:text="TANUSHA"
                 android:fontFamily="@font/poppins_bold"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"

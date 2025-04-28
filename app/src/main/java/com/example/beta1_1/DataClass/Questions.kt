@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @IgnoreExtraProperties
-data class NahwuQuestions(
+data class Questions(
     val question_id: String = "",
     val question_text: String = "",
     val options: List<Option> = listOf(),
@@ -23,5 +23,5 @@ data class Option(
 
 @IgnoreExtraProperties
 data class Quiz(
-    val questions: List<NahwuQuestions> = listOf()
+    val questions: List<Questions> = listOf()
 )

@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beta1_1.Adapter.NahwuQuizAdapter
-import com.example.beta1_1.DataClass.NahwuQuestions
+import com.example.beta1_1.DataClass.Questions
 import com.example.beta1_1.R
 import com.example.beta1_1.databinding.ActivityQuestionsBinding
 
@@ -18,7 +18,7 @@ class QuestionsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuestionsBinding
     private lateinit var adapter: NahwuQuizAdapter
-    private lateinit var questions: ArrayList<NahwuQuestions>
+    private lateinit var questions: ArrayList<Questions>
     private var materiName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +26,7 @@ class QuestionsActivity : AppCompatActivity() {
         binding = ActivityQuestionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        questions = intent.getParcelableArrayListExtra<NahwuQuestions>("QUESTIONS") ?: arrayListOf()
-
+        questions = intent.getParcelableArrayListExtra<Questions>("QUESTIONS") ?: arrayListOf()
         val bab = intent.getStringExtra("EXTRA_BAB")
         materiName = intent.getStringExtra("EXTRA_MATERI_NAME")
 
@@ -63,7 +62,7 @@ class QuestionsActivity : AppCompatActivity() {
     }
 
 
-    private fun setupRecylerView(questions: List<NahwuQuestions>) {
+    private fun setupRecylerView(questions: List<Questions>) {
         Log.d("cek kuis", "error: ${questions}")
         adapter = NahwuQuizAdapter(questions)
         binding.rvQuestions.apply {

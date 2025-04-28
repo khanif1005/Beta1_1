@@ -11,7 +11,7 @@
         android:id="@+id/iv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/img_logo"
+        android:src="@drawable/img_logofix"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="42dp"
         android:layout_marginEnd="32dp"
-        android:text="Log in to your existant account of NASHO LEARN"
+        android:text="Log in to your existant account of TANUSHA"
         android:fontFamily="@font/poppins_regular"
         />
 

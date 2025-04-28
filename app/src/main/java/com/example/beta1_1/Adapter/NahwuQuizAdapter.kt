@@ -7,10 +7,11 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.beta1_1.DataClass.NahwuQuestions
+import com.example.beta1_1.DataClass.Questions
+
 import com.example.beta1_1.R
 
-class NahwuQuizAdapter (private val questions: List<NahwuQuestions>) :
+class NahwuQuizAdapter (private val questions: List<Questions>) :
     RecyclerView.Adapter<NahwuQuizAdapter.ViewHolder>() {
 
         private val usersAnswers = mutableMapOf<Int, Int>()

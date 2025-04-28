@@ -27,7 +27,6 @@ class ProfileActivity : AppCompatActivity() {
         binding.tvNameProfile.text = name
         binding.tvEmailProfile.text = email
 
-        // Handle tombol kembali
         binding.icBackProfile.setOnClickListener {
             finish()
         }

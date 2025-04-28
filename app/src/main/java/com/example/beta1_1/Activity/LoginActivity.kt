@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) {
                         if (it.isSuccessful) {
-                            Toast.makeText(this, "Welcome to Nasho Learn! $email", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Welcome to TANUSHA! $email", Toast.LENGTH_SHORT).show()
                             val moveIntent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(moveIntent)
                         } else {

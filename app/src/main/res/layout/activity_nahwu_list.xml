@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Activity.NahwuListActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,119 +69,96 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_nahwu_title"
             />
 
-        <TextView
-            android:id="@+id/tv_titlematerialnahwu_before_uts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Materi"
-            android:fontFamily="@font/poppins_bold"
-            app:layout_constraintStart_toStartOf="@id/tv_nahwu_desc"
-            app:layout_constraintEnd_toEndOf="@+id/tv_nahwu_desc"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nahwu_desc"
-            />
-
-        <LinearLayout
-            android:id="@+id/ll_materialnahwu_before_uts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="@+id/tv_titlematerialnahwu_before_uts"
-            app:layout_constraintEnd_toEndOf="@+id/tv_titlematerialnahwu_before_uts"
-            app:layout_constraintTop_toBottomOf="@id/tv_titlematerialnahwu_before_uts">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_materialnahwu_before_uts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:nestedScrollingEnabled="false"
-                tools:itemCount="3"
-                tools:listitem="@layout/item_material_list"
-                />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_titleexamnahwu_uts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Ujian"
-            android:fontFamily="@font/poppins_bold"
-            app:layout_constraintStart_toStartOf="@id/ll_materialnahwu_before_uts"
-            app:layout_constraintEnd_toEndOf="@+id/ll_materialnahwu_before_uts"
-            app:layout_constraintTop_toBottomOf="@+id/ll_materialnahwu_before_uts"
-            />
-
-        <include
-            android:id="@+id/layout_exam_uts"
-            layout="@layout/item_layout_exam"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_materialnahwu_before_uts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_nahwu_desc"
+            android:paddingHorizontal="16dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="43dp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_titleexamnahwu_uts"
-            app:layout_constraintStart_toStartOf="@+id/tv_titleexamnahwu_uts"
-            app:layout_constraintTop_toBottomOf="@+id/tv_titleexamnahwu_uts"
-            />
+            tools:itemCount="20"
+            tools:listitem="@layout/item_material_list" />
 
-        <TextView
-            android:id="@+id/tv_titlematerialnahwu_after_uts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Materi"
-            android:fontFamily="@font/poppins_bold"
-            app:layout_constraintStart_toStartOf="@id/layout_exam_uts"
-            app:layout_constraintEnd_toEndOf="@+id/layout_exam_uts"
-            app:layout_constraintTop_toBottomOf="@+id/layout_exam_uts"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_titleexamnahwu_uts"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:text="Ujian"-->
+<!--            android:fontFamily="@font/poppins_bold"-->
+<!--            app:layout_constraintStart_toStartOf="@id/ll_materialnahwu_before_uts"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/ll_materialnahwu_before_uts"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/ll_materialnahwu_before_uts"-->
+<!--            />-->
 
-        <LinearLayout
-            android:id="@+id/ll_materialnahwu_after_uts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="@+id/tv_titlematerialnahwu_after_uts"
-            app:layout_constraintEnd_toEndOf="@+id/tv_titlematerialnahwu_after_uts"
-            app:layout_constraintTop_toBottomOf="@id/tv_titlematerialnahwu_after_uts">
+<!--        <include-->
+<!--            android:id="@+id/layout_exam_uts"-->
+<!--            layout="@layout/item_layout_exam"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="43dp"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/tv_titleexamnahwu_uts"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/tv_titleexamnahwu_uts"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_titleexamnahwu_uts"-->
+<!--            />-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_materialnahwu_after_uts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:nestedScrollingEnabled="false"
-                tools:itemCount="3"
-                tools:listitem="@layout/item_material_list"
-                />
-        </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_titlematerialnahwu_after_uts"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:text="Materi"-->
+<!--            android:fontFamily="@font/poppins_bold"-->
+<!--            app:layout_constraintStart_toStartOf="@id/layout_exam_uts"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/layout_exam_uts"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/layout_exam_uts"-->
+<!--            />-->
 
-        <TextView
-            android:id="@+id/tv_titleexamnahwu_uas"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Ujian"
-            android:fontFamily="@font/poppins_bold"
-            app:layout_constraintStart_toStartOf="@id/ll_materialnahwu_after_uts"
-            app:layout_constraintEnd_toEndOf="@+id/ll_materialnahwu_after_uts"
-            app:layout_constraintTop_toBottomOf="@+id/ll_materialnahwu_after_uts"
-            />
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ll_materialnahwu_after_uts"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/tv_titlematerialnahwu_after_uts"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/tv_titlematerialnahwu_after_uts"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_titlematerialnahwu_after_uts">-->
 
-        <include
-            android:id="@+id/layout_exam_uas"
-            layout="@layout/item_layout_exam"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="43dp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_titleexamnahwu_uas"
-            app:layout_constraintStart_toStartOf="@+id/tv_titleexamnahwu_uas"
-            app:layout_constraintTop_toBottomOf="@+id/tv_titleexamnahwu_uas"
-            />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rv_materialnahwu_after_uts"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:nestedScrollingEnabled="false"-->
+<!--                tools:itemCount="3"-->
+<!--                tools:listitem="@layout/item_material_list"-->
+<!--                />-->
+<!--        </LinearLayout>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_titleexamnahwu_uas"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:text="Ujian"-->
+<!--            android:fontFamily="@font/poppins_bold"-->
+<!--            app:layout_constraintStart_toStartOf="@id/ll_materialnahwu_after_uts"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/ll_materialnahwu_after_uts"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/ll_materialnahwu_after_uts"-->
+<!--            />-->
+
+<!--        <include-->
+<!--            android:id="@+id/layout_exam_uas"-->
+<!--            layout="@layout/item_layout_exam"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="43dp"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/tv_titleexamnahwu_uas"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/tv_titleexamnahwu_uas"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_titleexamnahwu_uas"-->
+<!--            />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

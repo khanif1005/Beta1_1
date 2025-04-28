@@ -10,7 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.beta1_1.DataClass.NahwuQuestions
+import com.example.beta1_1.DataClass.Questions
 import com.example.beta1_1.DataClass.Quiz
 import com.example.beta1_1.R
 import com.example.beta1_1.databinding.ActivityMaterialDetailBinding
@@ -56,8 +56,10 @@ class MaterialDetailActivity : AppCompatActivity() {
 
     private fun loadQuizFromFirestore() {
 
+        val materi = intent.getStringExtra(MATERI_NAME)
+        val quizColection = intent.getStringExtra(QUIZ_COLLECTION)
         val db = FirebaseFirestore.getInstance()
-        db.collection("materialNahwuList").document(documentId)
+        db.collection(materi ?: "").document(documentId)
             .get()
             .addOnSuccessListener { materiDoc ->
                 if (!materiDoc.exists()) {
@@ -70,7 +72,7 @@ class MaterialDetailActivity : AppCompatActivity() {
                     return@addOnSuccessListener
                 }
 
-                db.collection("nahwuQuizzes").document(quizId)
+                db.collection(quizColection ?: "").document(quizId)
                     .get()
                     .addOnSuccessListener { quizDoc ->
                         Log.d("cek kuis", "error: ${quizDoc}")
@@ -80,6 +82,7 @@ class MaterialDetailActivity : AppCompatActivity() {
                         }
 
                         val quiz = quizDoc.toObject(Quiz::class.java)
+                        Log.d("quiz", quiz?.questions.toString())
                         quiz?.questions?.let { questions ->
                             if (questions.isEmpty()) {
                                 Toast.makeText(this, "Kuis Kosong", Toast.LENGTH_SHORT).show()
@@ -110,7 +113,7 @@ class MaterialDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun startQuizActivity(questions: List<NahwuQuestions>, bab: String?, materiName: String?) {
+    private fun startQuizActivity(questions: List<Questions>, bab: String?, materiName: String?) {
         val intent = Intent(this, QuestionsActivity::class.java).apply {
             putExtra("EXTRA_BAB", bab)
             putExtra("EXTRA_MATERI_NAME", materiName)
@@ -124,6 +127,11 @@ class MaterialDetailActivity : AppCompatActivity() {
         binding.icBackMaterialDetail.setOnClickListener{
             finish()
         }
+    }
+
+    companion object {
+        const val MATERI_NAME = "MATERI"
+        const val QUIZ_COLLECTION = "QUIZ"
     }
 
 }

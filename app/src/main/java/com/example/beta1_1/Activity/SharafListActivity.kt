@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.beta1_1.Activity.MaterialDetailActivity.Companion.MATERI_NAME
+import com.example.beta1_1.Activity.MaterialDetailActivity.Companion.QUIZ_COLLECTION
 import com.example.beta1_1.Adapter.SharafListAdapter
 import com.example.beta1_1.DataClass.MaterialSharafList
 import com.example.beta1_1.databinding.ActivitySharafListBinding
@@ -52,6 +54,12 @@ class SharafListActivity : AppCompatActivity() {
         val intent = Intent(this, MaterialDetailActivity::class.java).apply {
             putExtra("EXTRA_BAB", material.bab)
             putExtra("EXTRA_MATERI_NAME", material.materialName)
+            putExtra("EXTRA_YOUTUBE", material.youtube)
+            putExtra("EXTRA_MATERI_ID", material.quiz_id)
+            putExtra("EXTRA_DOCUMENT_ID", material.document_id)
+            putExtra("EXTRA_MATERI", material.materi)
+            putExtra(MATERI_NAME, "materialSharafList")
+            putExtra(QUIZ_COLLECTION, "sharafQuizzes")
         }
         startActivity(intent)
     }

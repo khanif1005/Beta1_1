@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.beta1_1.Activity.MaterialDetailActivity.Companion.MATERI_NAME
+import com.example.beta1_1.Activity.MaterialDetailActivity.Companion.QUIZ_COLLECTION
 import com.example.beta1_1.Adapter.NahwuListAdapter
 import com.example.beta1_1.DataClass.MaterialNahwuList
 import com.example.beta1_1.databinding.ActivityNahwuListBinding
@@ -34,13 +36,15 @@ class NahwuListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerViews() {
+
+
         // Initialize kedua adapter
-        adapterBeforeUTS = NahwuListAdapter(ArrayList(), object : NahwuListAdapter.OnItemClickListener {
+        adapterBeforeUTS = NahwuListAdapter(context = this,ArrayList(), ArrayList(), object : NahwuListAdapter.OnItemClickListener {
             override fun onItemClick(material: MaterialNahwuList) {
                 navigateToDetail(material)
             }
         })
-        adapterAfterUTS = NahwuListAdapter(ArrayList(), object : NahwuListAdapter.OnItemClickListener {
+        adapterAfterUTS = NahwuListAdapter(context = this, ArrayList(),ArrayList(), object : NahwuListAdapter.OnItemClickListener {
             override fun onItemClick(material: MaterialNahwuList) {
                 navigateToDetail(material)
             }
@@ -53,15 +57,18 @@ class NahwuListActivity : AppCompatActivity() {
             setHasFixedSize(true)
         }
 
-        // Setup RecyclerView setelah UTS
-        binding.rvMaterialnahwuAfterUts.apply {
-            layoutManager = LinearLayoutManager(this@NahwuListActivity)
-            adapter = adapterAfterUTS
-            setHasFixedSize(true)
-        }
+//      true  // Setup RecyclerView setelah UTS
+//        binding.rvMaterialnahwuAfterUts.apply {
+//            layoutManager = LinearLayoutManager(this@NahwuListActivity)
+//            adapter = adapterAfterUTS
+//            setHasFixedSize(true)
+//        }
     }
 
     private fun navigateToDetail(material: MaterialNahwuList) {
+
+        //TODO SETUP EXAM HERE
+
 
         val intent = Intent (this, MaterialDetailActivity::class.java).apply {
             putExtra("EXTRA_BAB", material.bab)
@@ -70,11 +77,14 @@ class NahwuListActivity : AppCompatActivity() {
             putExtra("EXTRA_MATERI_ID", material.quiz_id)
             putExtra("EXTRA_DOCUMENT_ID", material.document_id)
             putExtra("EXTRA_MATERI", material.materi)
+            putExtra(MATERI_NAME, "materialNahwuList")
+            putExtra(QUIZ_COLLECTION, "nahwuQuizzes")
         }
         startActivity(intent)
     }
 
     private fun setupFirestore() {
+
         db = FirebaseFirestore.getInstance()
         listenerRegistration = db.collection("materialNahwuList")
             .orderBy("orderField", Query.Direction.ASCENDING)
@@ -86,22 +96,21 @@ class NahwuListActivity : AppCompatActivity() {
                 }
 
                 val allMaterials = ArrayList<MaterialNahwuList>()
+                val isExam = ArrayList<Boolean>()
                 value?.documents?.forEach { document ->
+                    Log.d("documentNahwu", document.toString())
                     try {
                         val material = document.toObject(MaterialNahwuList::class.java)
+                        val rawIsExam = document.getBoolean("isExam")
                         material?.let { allMaterials.add(it) }
+                        rawIsExam?.let { isExam.add(it) }
                     } catch (e: Exception) {
                         Log.e("Conversion Error", "Error in doc ${document.id}: ${e.message}")
                     }
                 }
 
-                // Filter data berdasarkan orderField
-                val beforeUTS = allMaterials.filter { it.orderField in 1L..9L }
-                val afterUTS = allMaterials.filter { it.orderField in 10L..16L }
-
                 // Update data ke adapter
-                adapterBeforeUTS.updateData(ArrayList(beforeUTS))
-                adapterAfterUTS.updateData(ArrayList(afterUTS))
+                adapterBeforeUTS.updateData(allMaterials,isExam)
             }
     }
 
@@ -110,5 +119,8 @@ class NahwuListActivity : AppCompatActivity() {
             finish()
         }
     }
+
+
+
 
 }

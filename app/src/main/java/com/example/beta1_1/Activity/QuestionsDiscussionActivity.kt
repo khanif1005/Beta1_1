@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beta1_1.Adapter.NahwuDiscussionAdapter
-import com.example.beta1_1.DataClass.NahwuQuestions
+import com.example.beta1_1.DataClass.Questions
 import com.example.beta1_1.R
 import java.util.ArrayList
 
@@ -22,7 +22,7 @@ class QuestionsDiscussionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_questions_discussion)
 
         val userAnswers = intent.getSerializableExtra("USER_ANSWERS") as? HashMap<Int, Int> ?: hashMapOf()
-        val questions = intent.getParcelableArrayListExtra<NahwuQuestions>("QUESTIONS") ?: arrayListOf()
+        val questions = intent.getParcelableArrayListExtra<Questions>("QUESTIONS") ?: arrayListOf()
 
         materiName = intent.getStringExtra("EXTRA_MATERI_NAME")
 
@@ -33,7 +33,7 @@ class QuestionsDiscussionActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(
-        questions: ArrayList<NahwuQuestions>,
+        questions: ArrayList<Questions>,
         userAnswers: java.util.HashMap<Int, Int>
     ) {
         val recylerView = findViewById<RecyclerView>(R.id.rv_discussion)

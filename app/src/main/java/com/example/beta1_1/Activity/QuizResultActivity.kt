@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.beta1_1.DataClass.NahwuQuestions
+import com.example.beta1_1.DataClass.Questions
 import com.example.beta1_1.R
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
@@ -30,7 +30,7 @@ class QuizResultActivity : AppCompatActivity() {
         val userAnswers = stringAnswers.mapKeys { it.key.toInt() } as HashMap<Int, Int>
 
         val score = intent.getIntExtra("EXTRA_SCORE", 0)
-        val questions = intent.getParcelableArrayListExtra<NahwuQuestions>("QUESTIONS") ?: arrayListOf()
+        val questions = intent.getParcelableArrayListExtra<Questions>("QUESTIONS") ?: arrayListOf()
 
         materiName = intent.getStringExtra("EXTRA_MATERI_NAME")
         userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""

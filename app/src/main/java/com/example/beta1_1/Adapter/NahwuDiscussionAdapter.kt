@@ -7,11 +7,11 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.beta1_1.DataClass.NahwuQuestions
+import com.example.beta1_1.DataClass.Questions
 import com.example.beta1_1.R
 
 class NahwuDiscussionAdapter(
-    private val questions: List<NahwuQuestions>,
+    private val questions: List<Questions>,
     private val userAnswer: Map<Int, Int>
 ) : RecyclerView.Adapter<NahwuDiscussionAdapter.NahwuDiscussionViewHolder>() {
 
@@ -53,7 +53,7 @@ class NahwuDiscussionAdapter(
 
     private fun handleUserAnswer(
         holder: NahwuDiscussionViewHolder,
-        question: NahwuQuestions,
+        question: Questions,
         userAnswerIndex: Int,
         isCorrect: Boolean
     ) {
