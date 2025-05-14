@@ -69,26 +69,14 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_sharaf_title"
             />
 
-        <TextView
-            android:id="@+id/tv_titlematerialsharaf_before_uts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Materi"
-            android:fontFamily="@font/poppins_bold"
-            app:layout_constraintStart_toStartOf="@id/tv_sharaf_desc"
-            app:layout_constraintEnd_toEndOf="@+id/tv_sharaf_desc"
-            app:layout_constraintTop_toBottomOf="@+id/tv_sharaf_desc"
-            />
-
         <LinearLayout
             android:id="@+id/ll_materialsharaf_before_uts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="@+id/tv_titlematerialsharaf_before_uts"
-            app:layout_constraintEnd_toEndOf="@+id/tv_titlematerialsharaf_before_uts"
-            app:layout_constraintTop_toBottomOf="@id/tv_titlematerialsharaf_before_uts">
+            app:layout_constraintStart_toStartOf="@+id/tv_sharaf_desc"
+            app:layout_constraintEnd_toEndOf="@+id/tv_sharaf_desc"
+            app:layout_constraintTop_toBottomOf="@id/tv_sharaf_desc">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_sharaf_list"
@@ -101,31 +89,6 @@
                 />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_titleexam_sharaf"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Ujian"
-            android:fontFamily="@font/poppins_bold"
-            app:layout_constraintStart_toStartOf="@id/ll_materialsharaf_before_uts"
-            app:layout_constraintEnd_toEndOf="@+id/ll_materialsharaf_before_uts"
-            app:layout_constraintTop_toBottomOf="@+id/ll_materialsharaf_before_uts"
-            />
-
-        <include
-            android:id="@+id/layout_exam_sharaf"
-            layout="@layout/item_layout_exam"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="43dp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_titleexam_sharaf"
-            app:layout_constraintStart_toStartOf="@+id/tv_titleexam_sharaf"
-            app:layout_constraintTop_toBottomOf="@+id/tv_titleexam_sharaf"
-            />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

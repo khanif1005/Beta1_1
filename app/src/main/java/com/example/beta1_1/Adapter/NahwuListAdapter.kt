@@ -21,7 +21,7 @@ class NahwuListAdapter(
 
     {
         interface OnItemClickListener {
-            fun onItemClick(material: MaterialNahwuList)
+            fun onItemClick(material: MaterialNahwuList, isExams : Boolean)
         }
 
         fun updateData(newData: ArrayList<MaterialNahwuList>,exams: ArrayList<Boolean>) {
@@ -49,17 +49,13 @@ class NahwuListAdapter(
             holder.title.text = "Materi"
         }else if(isExam){
             holder.title.visibility = View.VISIBLE
-//            val color = ContextCompat.getColor(context, R.color.mediumdarksideofblue)
-//            holder.cardView.setBackgroundColor(color)
-//            holder.cardView.radius = 15f
-
             holder.title.text = "Ujian"
         }else {
             holder.title.visibility = View.GONE
         }
 
         holder.itemView.setOnClickListener{
-            listener.onItemClick(materialNahwuList)
+            listener.onItemClick(materialNahwuList, isExam)
         }
     }
 

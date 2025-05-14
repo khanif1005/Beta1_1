@@ -11,15 +11,18 @@ import com.example.beta1_1.R
 
 class SharafListAdapter(
     private val sharafList: ArrayList<MaterialSharafList>,
+    private val isExams: ArrayList<Boolean>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<SharafListAdapter.SharafViewHolder>() {
 
     interface OnItemClickListener {
-        fun onItemClick (material: MaterialSharafList)
+        fun onItemClick (material: MaterialSharafList, isExams : Boolean)
     }
 
-    fun updateData(newData: ArrayList<MaterialSharafList>) {
+    fun updateData(newData: ArrayList<MaterialSharafList>,exams: ArrayList<Boolean>) {
         sharafList.clear()
+        isExams.clear()
+        isExams.addAll(exams)
         sharafList.addAll(newData)
         notifyDataSetChanged()
     }
@@ -33,11 +36,22 @@ class SharafListAdapter(
     override fun onBindViewHolder(holder: SharafViewHolder, position: Int) {
 
         val materialSharafList = sharafList[position]
+        val isExam = isExams[position]
         holder.bab.text = materialSharafList.bab
         holder.materialName.text = materialSharafList.materialName
 
+        if(position == 0 || isExams[position-1]){
+            holder.title.visibility = View.VISIBLE
+            holder.title.text = "Materi"
+        }else if(isExam){
+            holder.title.visibility = View.VISIBLE
+        holder.title.text = "Ujian"
+        }else {
+            holder.title.visibility = View.GONE
+        }
+
         holder.itemView.setOnClickListener{
-            listener.onItemClick(materialSharafList)
+            listener.onItemClick(materialSharafList, isExam)
         }
 
     }
@@ -49,6 +63,7 @@ class SharafListAdapter(
     class SharafViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val bab: TextView = itemView.findViewById(R.id.tv_material_title)
         val materialName: TextView = itemView.findViewById(R.id.tv_material_desc)
+        val title : TextView  = itemView.findViewById(R.id.tv_title)
     }
 
 }

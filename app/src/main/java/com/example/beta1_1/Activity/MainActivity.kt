@@ -40,9 +40,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.ic_profile -> {
                 val user = FirebaseAuth.getInstance().currentUser
                 val db = FirebaseFirestore.getInstance()
-
-                db.collection("users").document(user?.uid ?: "").get()
+                db.collection("users").document(user?.uid ?: "")
+                    .get()
                     .addOnSuccessListener { document ->
+
                         val name = document.getString("name") ?: "User"
                         val email = document.getString("email") ?: ""
 

@@ -31,9 +31,10 @@ class QuizResultActivity : AppCompatActivity() {
 
         val score = intent.getIntExtra("EXTRA_SCORE", 0)
         val questions = intent.getParcelableArrayListExtra<Questions>("QUESTIONS") ?: arrayListOf()
-
         materiName = intent.getStringExtra("EXTRA_MATERI_NAME")
+
         userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+
         saveQuizResultToFirestore(userId, score, userAnswers)
 
 

@@ -52,7 +52,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     // PDF Viewer
-    implementation("com.github.mhiew:android-pdf-viewer:3.2.0-beta.1") {
+    implementation("com.github.mhiew:android-pdf-viewer:3.2.0-beta.3") {
         exclude(group = "com.android.support", module = "support-compat") // Hindari Support Library
     }
 
@@ -61,6 +61,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
 
     //firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))

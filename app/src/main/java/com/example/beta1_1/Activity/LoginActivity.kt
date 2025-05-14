@@ -30,7 +30,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             redirectToMainActivity()
             return
         }
-
     }
 
     private fun redirectToMainActivity() {

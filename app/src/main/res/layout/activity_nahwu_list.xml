@@ -76,7 +76,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_nahwu_desc"
             android:paddingHorizontal="16dp"
             android:layout_marginTop="10dp"
-            tools:itemCount="20"
+            tools:itemCount="5"
             tools:listitem="@layout/item_material_list" />
 
 <!--        <TextView-->

@@ -4,18 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beta1_1.DataClass.Questions
 import com.example.beta1_1.R
 
-class NahwuDiscussionAdapter(
+class QuestionsDiscussionAdapter(
     private val questions: List<Questions>,
     private val userAnswer: Map<Int, Int>
-) : RecyclerView.Adapter<NahwuDiscussionAdapter.NahwuDiscussionViewHolder>() {
+) : RecyclerView.Adapter<QuestionsDiscussionAdapter.QuestionsDiscussionViewHolder>() {
 
-    inner class NahwuDiscussionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class QuestionsDiscussionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNo: TextView = itemView.findViewById(R.id.tv_no_discussion)
         val tvQuestions: TextView = itemView.findViewById(R.id.tv_question_discussion)
         val tvCorrectAnswer: TextView = itemView.findViewById(R.id.tv_right_answer_value)
@@ -23,15 +22,15 @@ class NahwuDiscussionAdapter(
         val tvCorrectstatus: TextView = itemView.findViewById(R.id.tv_correct_discussion)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NahwuDiscussionViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionsDiscussionViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_layout_discussion, parent, false)
-        return NahwuDiscussionViewHolder(view)
+        return QuestionsDiscussionViewHolder(view)
     }
 
     override fun getItemCount(): Int = questions.size
 
-    override fun onBindViewHolder(holder: NahwuDiscussionViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: QuestionsDiscussionViewHolder, position: Int) {
         val question = questions[position]
         val userAnswerIndex = userAnswer[position] ?: 0
         val correctAnswerIndex = question.correct_answer
@@ -52,7 +51,7 @@ class NahwuDiscussionAdapter(
     }
 
     private fun handleUserAnswer(
-        holder: NahwuDiscussionViewHolder,
+        holder: QuestionsDiscussionViewHolder,
         question: Questions,
         userAnswerIndex: Int,
         isCorrect: Boolean

@@ -8,8 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beta1_1.Activity.MaterialDetailActivity.Companion.MATERI_NAME
 import com.example.beta1_1.Activity.MaterialDetailActivity.Companion.QUIZ_COLLECTION
+import com.example.beta1_1.Adapter.NahwuListAdapter
 import com.example.beta1_1.Adapter.SharafListAdapter
+import com.example.beta1_1.DataClass.MaterialNahwuList
 import com.example.beta1_1.DataClass.MaterialSharafList
+import com.example.beta1_1.DataClass.Quiz
 import com.example.beta1_1.databinding.ActivitySharafListBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -36,9 +39,9 @@ class SharafListActivity : AppCompatActivity() {
 
     private fun setupRecyclerViews() {
 
-        sharafListAdapter = SharafListAdapter(ArrayList(), object : SharafListAdapter.OnItemClickListener {
-            override fun onItemClick(material : MaterialSharafList) {
-                navigateToDetail(material)
+        sharafListAdapter = SharafListAdapter(ArrayList(), ArrayList(), object : SharafListAdapter.OnItemClickListener {
+            override fun onItemClick(material: MaterialSharafList, isExams : Boolean) {
+                navigateToDetail(material,isExams )
             }
         })
 
@@ -50,18 +53,40 @@ class SharafListActivity : AppCompatActivity() {
 
     }
 
-    private fun navigateToDetail(material: MaterialSharafList) {
-        val intent = Intent(this, MaterialDetailActivity::class.java).apply {
-            putExtra("EXTRA_BAB", material.bab)
-            putExtra("EXTRA_MATERI_NAME", material.materialName)
-            putExtra("EXTRA_YOUTUBE", material.youtube)
-            putExtra("EXTRA_MATERI_ID", material.quiz_id)
-            putExtra("EXTRA_DOCUMENT_ID", material.document_id)
-            putExtra("EXTRA_MATERI", material.materi)
-            putExtra(MATERI_NAME, "materialSharafList")
-            putExtra(QUIZ_COLLECTION, "sharafQuizzes")
+    private fun navigateToDetail(material: MaterialSharafList, isExams : Boolean) {
+        if(isExams){
+            db.collection("sharafQuizzes").document(material.quiz_id ?: "")
+                .get()
+                .addOnSuccessListener { quizDoc ->
+                    if (!quizDoc.exists()) {
+                        Toast.makeText(this, "Kuis tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        return@addOnSuccessListener
+                    }
+
+                    val quiz = quizDoc.toObject(Quiz::class.java)
+                    quiz?.questions?.let { questions ->
+                        val intent = Intent(this, QuestionsActivity::class.java).apply {
+                            putExtra("EXTRA_BAB", material.bab)
+                            putExtra("EXTRA_MATERI_NAME",material.materialName)
+                            putExtra("EXTRA_DOCUMENT_ID", material.document_id)
+                            putParcelableArrayListExtra("QUESTIONS", ArrayList(questions))
+                        }
+                        startActivity(intent)
+                    }
+                }
+        }else{
+            val intent = Intent(this, MaterialDetailActivity::class.java).apply {
+                putExtra("EXTRA_BAB", material.bab)
+                putExtra("EXTRA_MATERI_NAME", material.materialName)
+                putExtra("EXTRA_YOUTUBE", material.youtube)
+                putExtra("EXTRA_MATERI_ID", material.quiz_id)
+                putExtra("EXTRA_DOCUMENT_ID", material.document_id)
+                putExtra("EXTRA_MATERI", material.materi)
+                putExtra(MATERI_NAME, "materialSharafList")
+                putExtra(QUIZ_COLLECTION, "sharafQuizzes")
+            }
+            startActivity(intent)
         }
-        startActivity(intent)
     }
 
     private fun setupFirestore() {
@@ -76,9 +101,12 @@ class SharafListActivity : AppCompatActivity() {
                 }
 
                 val allMaterials = ArrayList<MaterialSharafList>()
+                val isExam = ArrayList<Boolean>()
                 value?.documents?.forEach { document ->
                     try {
                         val material = document.toObject(MaterialSharafList::class.java)
+                        val rawIsExam = document.getBoolean("isExam")
+                        rawIsExam?.let { isExam.add(it) }
                         material?.let { allMaterials.add(it) }
                     } catch (e: Exception) {
                         Log.e("Conversion Error", "Error in doc ${document.id}: ${e.message}")
@@ -86,7 +114,7 @@ class SharafListActivity : AppCompatActivity() {
                 }
 
                 //kirim data yang sudah diambil
-                sharafListAdapter.updateData(allMaterials)
+                sharafListAdapter.updateData(allMaterials, isExam)
                 Log.d("Firestore Debug", "Data loaded: ${allMaterials.size} items")
             }
     }

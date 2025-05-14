@@ -8,11 +8,10 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beta1_1.DataClass.Questions
-
 import com.example.beta1_1.R
 
-class NahwuQuizAdapter (private val questions: List<Questions>) :
-    RecyclerView.Adapter<NahwuQuizAdapter.ViewHolder>() {
+class QuizAdapter (private val questions: List<Questions>) :
+    RecyclerView.Adapter<QuizAdapter.ViewHolder>() {
 
         private val usersAnswers = mutableMapOf<Int, Int>()
 
@@ -70,6 +69,4 @@ class NahwuQuizAdapter (private val questions: List<Questions>) :
     fun getUserAnswers(): Map<Int, Int> {
         return usersAnswers.toMap()
     }
-
-
 }

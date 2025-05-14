@@ -100,7 +100,6 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener{
                                         Toast.makeText(this, "Berhasil Mendaftar", Toast.LENGTH_SHORT).show()
                                         startActivity(Intent(this, LoginActivity::class.java))
                                     }
-
                                     .addOnFailureListener { e ->
                                         Toast.makeText(this, "eror saving user data: ${e.message}", Toast.LENGTH_SHORT).show()
                                     }

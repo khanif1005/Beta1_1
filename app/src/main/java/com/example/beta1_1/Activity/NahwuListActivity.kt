@@ -10,6 +10,7 @@ import com.example.beta1_1.Activity.MaterialDetailActivity.Companion.MATERI_NAME
 import com.example.beta1_1.Activity.MaterialDetailActivity.Companion.QUIZ_COLLECTION
 import com.example.beta1_1.Adapter.NahwuListAdapter
 import com.example.beta1_1.DataClass.MaterialNahwuList
+import com.example.beta1_1.DataClass.Quiz
 import com.example.beta1_1.databinding.ActivityNahwuListBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -21,9 +22,9 @@ class NahwuListActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
     private var listenerRegistration: ListenerRegistration? = null
 
-    // Dua adapter untuk dua RecyclerView
-    private lateinit var adapterBeforeUTS: NahwuListAdapter
-    private lateinit var adapterAfterUTS: NahwuListAdapter
+    //adapter untuk RecyclerView
+    private lateinit var nahwuAdapter: NahwuListAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,49 +39,61 @@ class NahwuListActivity : AppCompatActivity() {
     private fun setupRecyclerViews() {
 
 
-        // Initialize kedua adapter
-        adapterBeforeUTS = NahwuListAdapter(context = this,ArrayList(), ArrayList(), object : NahwuListAdapter.OnItemClickListener {
-            override fun onItemClick(material: MaterialNahwuList) {
-                navigateToDetail(material)
-            }
-        })
-        adapterAfterUTS = NahwuListAdapter(context = this, ArrayList(),ArrayList(), object : NahwuListAdapter.OnItemClickListener {
-            override fun onItemClick(material: MaterialNahwuList) {
-                navigateToDetail(material)
+        // Initialize adapter
+        nahwuAdapter = NahwuListAdapter(context = this,ArrayList(), ArrayList(), object : NahwuListAdapter.OnItemClickListener {
+            override fun onItemClick(material: MaterialNahwuList, isExams: Boolean) {
+                navigateToDetail(material, isExams)
             }
         })
 
-        // Setup RecyclerView sebelum UTS
+
+        // Setup RecyclerView
         binding.rvMaterialnahwuBeforeUts.apply {
             layoutManager = LinearLayoutManager(this@NahwuListActivity)
-            adapter = adapterBeforeUTS
+            adapter = nahwuAdapter
             setHasFixedSize(true)
         }
-
-//      true  // Setup RecyclerView setelah UTS
-//        binding.rvMaterialnahwuAfterUts.apply {
-//            layoutManager = LinearLayoutManager(this@NahwuListActivity)
-//            adapter = adapterAfterUTS
-//            setHasFixedSize(true)
-//        }
     }
 
-    private fun navigateToDetail(material: MaterialNahwuList) {
+    private fun navigateToDetail(material: MaterialNahwuList, isExams : Boolean) {
 
-        //TODO SETUP EXAM HERE
+        if(isExams){
+            db.collection("nahwuQuizzes").document(material.quiz_id)
+                .get()
+                .addOnSuccessListener { quizDoc ->
+                    if (!quizDoc.exists()) {
+                        Toast.makeText(this, "Kuis tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        return@addOnSuccessListener
+                    }
 
-
-        val intent = Intent (this, MaterialDetailActivity::class.java).apply {
-            putExtra("EXTRA_BAB", material.bab)
-            putExtra("EXTRA_MATERI_NAME", material.materialName)
-            putExtra("EXTRA_YOUTUBE", material.youtube)
-            putExtra("EXTRA_MATERI_ID", material.quiz_id)
-            putExtra("EXTRA_DOCUMENT_ID", material.document_id)
-            putExtra("EXTRA_MATERI", material.materi)
-            putExtra(MATERI_NAME, "materialNahwuList")
-            putExtra(QUIZ_COLLECTION, "nahwuQuizzes")
+                    val quiz = quizDoc.toObject(Quiz::class.java)
+                    Log.d("quiz", quiz?.questions.toString())
+                    quiz?.questions?.let { questions ->
+                        val intent = Intent(this, QuestionsActivity::class.java).apply {
+                            putExtra("EXTRA_BAB", material.bab)
+                            putExtra("EXTRA_MATERI_NAME",material.materialName)
+                            putExtra("EXTRA_DOCUMENT_ID", material.document_id)
+                            putParcelableArrayListExtra("QUESTIONS", ArrayList(questions))
+                        }
+                        startActivity(intent)
+                    }
+                }
+        }else{
+            val intent = Intent (this, MaterialDetailActivity::class.java).apply {
+                putExtra("EXTRA_BAB", material.bab)
+                putExtra("EXTRA_MATERI_NAME", material.materialName)
+                putExtra("EXTRA_YOUTUBE", material.youtube)
+                putExtra("EXTRA_MATERI_ID", material.quiz_id)
+                putExtra("EXTRA_DOCUMENT_ID", material.document_id)
+                putExtra("EXTRA_MATERI", material.materi)
+                putExtra(MATERI_NAME, "materialNahwuList")
+                putExtra(QUIZ_COLLECTION, "nahwuQuizzes")
+            }
+            startActivity(intent)
         }
-        startActivity(intent)
+
+
+
     }
 
     private fun setupFirestore() {
@@ -110,7 +123,7 @@ class NahwuListActivity : AppCompatActivity() {
                 }
 
                 // Update data ke adapter
-                adapterBeforeUTS.updateData(allMaterials,isExam)
+                nahwuAdapter.updateData(allMaterials,isExam)
             }
     }
 

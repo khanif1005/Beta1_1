@@ -3,21 +3,16 @@ package com.example.beta1_1.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.beta1_1.Adapter.NahwuQuizAdapter
+import com.example.beta1_1.Adapter.QuizAdapter
 import com.example.beta1_1.DataClass.Questions
-import com.example.beta1_1.R
 import com.example.beta1_1.databinding.ActivityQuestionsBinding
 
 class QuestionsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuestionsBinding
-    private lateinit var adapter: NahwuQuizAdapter
+    private lateinit var adapter: QuizAdapter
     private lateinit var questions: ArrayList<Questions>
     private var materiName: String? = null
 
@@ -64,7 +59,7 @@ class QuestionsActivity : AppCompatActivity() {
 
     private fun setupRecylerView(questions: List<Questions>) {
         Log.d("cek kuis", "error: ${questions}")
-        adapter = NahwuQuizAdapter(questions)
+        adapter = QuizAdapter(questions)
         binding.rvQuestions.apply {
             layoutManager = LinearLayoutManager(this@QuestionsActivity)
             adapter = this@QuestionsActivity.adapter

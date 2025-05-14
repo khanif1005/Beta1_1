@@ -15,6 +15,10 @@ import com.example.beta1_1.DataClass.Quiz
 import com.example.beta1_1.R
 import com.example.beta1_1.databinding.ActivityMaterialDetailBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.io.File
+import java.io.FileOutputStream
 
 class MaterialDetailActivity : AppCompatActivity() {
 
@@ -39,7 +43,10 @@ class MaterialDetailActivity : AppCompatActivity() {
 
         binding.tvMaterialdetailBab.text = bab
         binding.tvMaterialdetailTitle.text = materiName
-        binding.tvMateriDetail.text = Html.fromHtml(materi, Html.FROM_HTML_MODE_COMPACT)
+
+        materi?.let {
+            downloadAndDisplayPdf(it)
+        }
 
         binding.btnStartQuiz.setOnClickListener{
             if (documentId.isEmpty()) {
@@ -97,6 +104,35 @@ class MaterialDetailActivity : AppCompatActivity() {
             }
 
     }
+
+    private fun downloadAndDisplayPdf(url: String) {
+        Thread {
+            try {
+                val client = OkHttpClient()
+                val request = Request.Builder().url(url).build()
+                val response = client.newCall(request).execute()
+                if (response.isSuccessful) {
+                    val inputStream = response.body?.byteStream()
+                    val file = File(cacheDir, "material.pdf")
+                    val outputStream = FileOutputStream(file)
+                    inputStream?.copyTo(outputStream)
+                    outputStream.close()
+
+                    runOnUiThread {
+                        binding.pdfView.fromFile(file)
+                            .enableSwipe(true)
+                            .swipeHorizontal(false)
+                            .enableDoubletap(true)
+                            .load()
+                    }
+                }
+            } catch (e: Exception) {
+                Log.d("pdf", e.toString())
+                e.printStackTrace()
+            }
+        }.start()
+    }
+
 
     private fun setupWatchVideoButton(youtube: String?, bab: String?, materiName: String?) {
         binding.btnWatchVideo.setOnClickListener{
