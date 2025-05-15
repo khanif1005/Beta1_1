@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         startActivity(intent)
                     }
                     .addOnFailureListener { e ->
-                        // Handle error
                         Log.e("Firestore", "Error getting document: ${e.message}")
                     }
 

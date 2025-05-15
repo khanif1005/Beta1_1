@@ -37,15 +37,12 @@ class NahwuListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerViews() {
-
-
         // Initialize adapter
         nahwuAdapter = NahwuListAdapter(context = this,ArrayList(), ArrayList(), object : NahwuListAdapter.OnItemClickListener {
             override fun onItemClick(material: MaterialNahwuList, isExams: Boolean) {
                 navigateToDetail(material, isExams)
             }
         })
-
 
         // Setup RecyclerView
         binding.rvMaterialnahwuBeforeUts.apply {
@@ -58,7 +55,8 @@ class NahwuListActivity : AppCompatActivity() {
     private fun navigateToDetail(material: MaterialNahwuList, isExams : Boolean) {
 
         if(isExams){
-            db.collection("nahwuQuizzes").document(material.quiz_id)
+            db.collection("nahwuQuizzes")
+                .document(material.quiz_id)
                 .get()
                 .addOnSuccessListener { quizDoc ->
                     if (!quizDoc.exists()) {
@@ -91,9 +89,6 @@ class NahwuListActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
-
-
-
     }
 
     private fun setupFirestore() {
@@ -121,7 +116,6 @@ class NahwuListActivity : AppCompatActivity() {
                         Log.e("Conversion Error", "Error in doc ${document.id}: ${e.message}")
                     }
                 }
-
                 // Update data ke adapter
                 nahwuAdapter.updateData(allMaterials,isExam)
             }
@@ -132,8 +126,4 @@ class NahwuListActivity : AppCompatActivity() {
             finish()
         }
     }
-
-
-
-
 }

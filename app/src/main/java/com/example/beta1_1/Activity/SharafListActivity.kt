@@ -55,7 +55,8 @@ class SharafListActivity : AppCompatActivity() {
 
     private fun navigateToDetail(material: MaterialSharafList, isExams : Boolean) {
         if(isExams){
-            db.collection("sharafQuizzes").document(material.quiz_id ?: "")
+            db.collection("sharafQuizzes")
+                .document(material.quiz_id ?: "")
                 .get()
                 .addOnSuccessListener { quizDoc ->
                     if (!quizDoc.exists()) {
@@ -112,7 +113,6 @@ class SharafListActivity : AppCompatActivity() {
                         Log.e("Conversion Error", "Error in doc ${document.id}: ${e.message}")
                     }
                 }
-
                 //kirim data yang sudah diambil
                 sharafListAdapter.updateData(allMaterials, isExam)
                 Log.d("Firestore Debug", "Data loaded: ${allMaterials.size} items")

@@ -2,6 +2,7 @@ package com.example.beta1_1.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
