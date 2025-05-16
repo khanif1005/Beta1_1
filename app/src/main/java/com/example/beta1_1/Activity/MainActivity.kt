@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     .get()
                     .addOnSuccessListener { document ->
 
-                        val name = document.getString("name") ?: "User"
+                        val name = document.getString("name") ?: ""
                         val email = document.getString("email") ?: ""
 
                         val intent = Intent(this, ProfileActivity::class.java).apply {
