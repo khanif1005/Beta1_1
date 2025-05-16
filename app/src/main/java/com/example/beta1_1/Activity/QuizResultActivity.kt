@@ -69,7 +69,8 @@ class QuizResultActivity : AppCompatActivity() {
         val quizResult = hashMapOf(
             "timestamp" to FieldValue.serverTimestamp(),
             "score" to score,
-            "answers" to convertedAnswers
+            "answers" to convertedAnswers,
+            "materiName" to materiName
         )
 
         db.collection("users")
